@@ -24,18 +24,18 @@ export const App: React.FC = () => {
           text={'Grave uma nota em áudio que será convertida para texto automaticamente.'}/>
         
         <NoteCard
-          title={'há 2 dias'}
-          text={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade'}
+          createDate={new Date('2024, 1, 1')}
+          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade'}
         />
         
         <NoteCard
-          title={'há 2 dias'}
-          text={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
+          createDate={new Date()}
+          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
         />
         
         <NoteCard
-          title={'há 2 dias'}
-          text={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
+          createDate={new Date()}
+          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
         />
       </div>
     
