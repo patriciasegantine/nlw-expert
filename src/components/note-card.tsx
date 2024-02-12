@@ -44,17 +44,11 @@ export const NoteCard: React.FC<NoteCardProps> = ({content, createDate}) => {
           
           <div className="flex flex-col flex-1 gap-3 p-5">
             <span className="text-sm font-medium text-slate-300">
-             {formatDistanceToNow(new Date())}
+             {formatDistanceToNow(createDate)}
             </span>
             
             <p className="text-sm leading-6 text-slate-400">
-              No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a
-              comunidade.
-              Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na
-              aplicação
-              React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React
-              vamos
-              criar um projeto que permite o usuário salvar notas em texto ou áudio.
+              {content}
             </p>
           </div>
           

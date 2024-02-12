@@ -1,23 +1,53 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { toast } from "sonner";
 
 interface INewNoteCard {
-  text: string
-  title: string
+  onCreateNote: (content: string) => void
 }
 
-export const NewNoteCard: React.FC<INewNoteCard> = ({text, title}) => {
+export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateNote}) => {
+  
+  const [shouldShowOnboarding, setShouldShowOnboarding] = useState<boolean>(true)
+  const [content, setContent] = useState<string>('')
+  
+  const handleStartEditor = () => {
+    setShouldShowOnboarding(false)
+  };
+  
+  const handleContentChanged = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value)
+    
+    if (e.target.value === '') {
+      setShouldShowOnboarding(true)
+    }
+  };
+  
+  const handleSaveNote = (e: FormEvent) => {
+    e.preventDefault()
+    onCreateNote(content)
+    toast.success('Note added with success')
+    setContent('')
+    setShouldShowOnboarding(true)
+  }
+  
+  const handleResetEditor = () => {
+    setShouldShowOnboarding(true)
+    setContent('')
+  }
   
   return (
     <Dialog.Root>
       <Dialog.Trigger
-        className="flex flex-col bg-slate-700 rounded-md p-5 gap-3 outline-none hover:ring-2 hover:ring-slate-600 text-left focus-visible:ring-2 focus-visible:ring-lime-400">
+        className="flex flex-col bg-slate-700 rounded-md p-5 gap-3 outline-none hover:ring-2 hover:ring-slate-600 text-left focus-visible:ring-2 focus-visible:ring-lime-400"
+        onClick={handleResetEditor}
+      >
           <span className="text-slate-200 text-sm font-medium">
-             {title}
+            Add note
           </span>
         <p className="text-slate-400 text-sm">
-          {text}
+          Record an audio note that will be automatically converted to text.
         </p>
       </Dialog.Trigger>
       
@@ -36,22 +66,49 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({text, title}) => {
             </button>
           </Dialog.Close>
           
-          <div className="flex flex-col flex-1 gap-3 p-5">
+          <form onSubmit={handleSaveNote} className="flex flex-1 flex-col">
+            <div className="flex flex-col flex-1 gap-3 p-5">
             <span className="text-sm font-medium text-slate-300">
-            Adicionar nota
+            Add note
             </span>
+              
+              {
+                shouldShowOnboarding
+                  ? <p className="text-sm leading-6 text-slate-400">
+                    Start by
+                    <button
+                      className="text-lime-400 hover:underline font-medium px-0.5"
+                      onClick={handleStartEditor}
+                    >
+                      recording an audio note
+                    </button>
+                    or, if you prefer
+                    <button
+                      className="text-lime-400 hover:underline font-medium px-0.5"
+                      onClick={handleStartEditor}> use text only
+                    </button>.
+                  </p>
+                  : <textarea
+                    autoFocus
+                    className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none"
+                    onChange={handleContentChanged}
+                    value={content}
+                  />
+              }
             
-            <p className="text-sm leading-6 text-slate-400">
-              Start by <span className="text-lime-400 hover:underline font-medium">recording an audio note</span> or, if
-              you prefer <span className="text-lime-400 hover:underline font-medium">use text only</span>.
-            </p>
-          </div>
+            </div>
+            
+            {
+              !shouldShowOnboarding &&
+              <button
+                type="submit"
+                className="w-full text-sm bg-lime-400 text-lime-950 font-medium py-4 outline-none hover:bg-lime-500"
+              >
+                Salvar nota
+              </button>
+            }
           
-          <button
-            type="button"
-            className="w-full text-sm bg-lime-400 text-lime-950 font-medium py-4 outline-none hover:bg-lime-500">
-            Salvar nota
-          </button>
+          </form>
         
         </Dialog.Content>
       </Dialog.Portal>

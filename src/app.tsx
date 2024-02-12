@@ -1,9 +1,47 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { NoteCard } from "@/components/note-card.tsx";
 import { NewNoteCard } from "@/components/new-note-card.tsx";
 import logo from '../src/assets/logo-nlw-expert.svg'
 
+export interface INote {
+  id: string,
+  date: string,
+  content: string,
+}
+
 export const App: React.FC = () => {
+  
+  const [notes, setNotes] = useState<INote[]>(() => {
+    const notesOnStorage = localStorage.getItem('notes')
+    if (notesOnStorage) return JSON.parse(notesOnStorage)
+    return []
+  })
+  
+  const [search, setSearch] = useState<string>('')
+  
+  const onCreateNote = (content: string) => {
+    const newNote = {
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(),
+      content
+    }
+    
+    const notesArray = [newNote, ...notes]
+    
+    setNotes(notesArray)
+    
+    localStorage.setItem('notes', JSON.stringify(notesArray))
+  }
+  
+  const handleOnSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value
+    setSearch(query)
+  }
+  
+  const filteredNotes = search !== ''
+    ? notes.filter(note => note.content.toLowerCase().includes(search.toLowerCase()))
+    : notes
+  
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-6">
       <img src={logo} alt="NLW expert"/>
@@ -11,8 +49,9 @@ export const App: React.FC = () => {
       <form className="w-full mt-6">
         <input
           type="text"
-          placeholder={'Busque em suas notas...'}
+          placeholder={'Search in your notes...'}
           className="w-full bg-transparent text-2xl font-semibold tracking-tight placeholder:text-slate-500 outline-none"
+          onChange={handleOnSearch}
         />
       </form>
       
@@ -20,23 +59,20 @@ export const App: React.FC = () => {
       
       <div className="grid grid-cols-3 auto-rows-[250px] gap-6">
         <NewNoteCard
-          title={'Adicionar nota'}
-          text={'Grave uma nota em áudio que será convertida para texto automaticamente.'}/>
-        
-        <NoteCard
-          createDate={new Date('2024, 1, 1')}
-          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade'}
+          onCreateNote={onCreateNote}
         />
         
-        <NoteCard
-          createDate={new Date()}
-          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
-        />
-        
-        <NoteCard
-          createDate={new Date()}
-          content={'No app do NLW vamos criar um layout incrível, assim podemos entregar a melhor experiência para a comunidade. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio. Na aplicação React vamos criar um projeto que permite o usuário salvar notas em texto ou áudio'}
-        />
+        {
+          filteredNotes?.map(note => {
+            return (
+              <NoteCard
+                key={note.id}
+                createDate={new Date(note.date)}
+                content={note.content}
+              />
+            )
+          })
+        }
       </div>
     
     
