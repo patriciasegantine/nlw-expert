@@ -43,7 +43,7 @@ export const App: React.FC = () => {
   }
   
   return (
-    <div className="mx-auto max-w-6xl my-12 space-y-6">
+    <div className="mx-auto max-w-6xl my-12 space-y-6 px-5">
       <img src={logo} alt="NLW expert"/>
       
       <form className="w-full mt-6">
@@ -57,7 +57,7 @@ export const App: React.FC = () => {
       
       <div className="h-[1px] bg-slate-700"/>
       
-      <div className="grid grid-cols-3 auto-rows-[250px] gap-6">
+      <div className="grid grid-cols auto-rows-[250px] gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <NewNoteCard
           onCreateTextNote={onCreateTextNote}
         />
