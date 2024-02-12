@@ -19,7 +19,11 @@ export const App: React.FC = () => {
   
   const [search, setSearch] = useState<string>('')
   
-  const onCreateNote = (content: string) => {
+  const filteredNotes = search !== ''
+    ? notes.filter(note => note.content.toLowerCase().includes(search.toLowerCase()))
+    : notes
+  
+  const onCreateTextNote = (content: string) => {
     const newNote = {
       id: crypto.randomUUID(),
       date: new Date().toISOString(),
@@ -38,10 +42,6 @@ export const App: React.FC = () => {
     setSearch(query)
   }
   
-  const filteredNotes = search !== ''
-    ? notes.filter(note => note.content.toLowerCase().includes(search.toLowerCase()))
-    : notes
-  
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-6">
       <img src={logo} alt="NLW expert"/>
@@ -59,7 +59,7 @@ export const App: React.FC = () => {
       
       <div className="grid grid-cols-3 auto-rows-[250px] gap-6">
         <NewNoteCard
-          onCreateNote={onCreateNote}
+          onCreateTextNote={onCreateTextNote}
         />
         
         {

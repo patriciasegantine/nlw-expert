@@ -4,15 +4,19 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 
 interface INewNoteCard {
-  onCreateNote: (content: string) => void
+  onCreateTextNote: (content: string) => void
 }
 
-export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateNote}) => {
+let speechRecognition: SpeechRecognition | null = null
+
+export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateTextNote}) => {
   
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState<boolean>(true)
   const [content, setContent] = useState<string>('')
+  const [isRecording, setIsRecording] = useState<boolean>(false)
   
   const handleStartEditor = () => {
+    setIsRecording(false)
     setShouldShowOnboarding(false)
   };
   
@@ -26,10 +30,52 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateNote}) => {
   
   const handleSaveNote = (e: FormEvent) => {
     e.preventDefault()
-    onCreateNote(content)
-    toast.success('Note added with success')
+    
+    onCreateTextNote(content)
     setContent('')
     setShouldShowOnboarding(true)
+    toast.success('Note added with success')
+  }
+  
+  const handleStartRecording = () => {
+    setIsRecording(true)
+    setShouldShowOnboarding(false)
+    
+    const isSpeechRecognitionAPIAvailable = 'speechRecognition' in window
+      || 'webkitSpeechRecognition' in window
+    
+    if (!isSpeechRecognitionAPIAvailable) {
+      alert('Unfortunately, your browser does not support the recording API.')
+      return
+    }
+    
+    const speechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
+    
+    speechRecognition = new speechRecognitionAPI()
+    
+    speechRecognition.lang = 'en-GB'
+    speechRecognition.continuous = true
+    speechRecognition.maxAlternatives = 1
+    speechRecognition.interimResults = true
+    
+    speechRecognition.onresult = (e) => {
+      const transcription = Array.from(e.results)
+        .reduce((text, result) => {
+          return text.concat(result[0].transcript)
+        }, '')
+      
+      setContent(transcription)
+    }
+    
+    speechRecognition.onerror = (e) => console.error(e)
+    speechRecognition.start()
+    
+  }
+  
+  const handleStopRecording = () => {
+    setIsRecording(false)
+    speechRecognition?.stop()
+    
   }
   
   const handleResetEditor = () => {
@@ -66,24 +112,26 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateNote}) => {
             </button>
           </Dialog.Close>
           
-          <form onSubmit={handleSaveNote} className="flex flex-1 flex-col">
+          <form className="flex flex-1 flex-col">
             <div className="flex flex-col flex-1 gap-3 p-5">
             <span className="text-sm font-medium text-slate-300">
             Add note
             </span>
-              
               {
                 shouldShowOnboarding
                   ? <p className="text-sm leading-6 text-slate-400">
                     Start by
                     <button
+                      type="button"
                       className="text-lime-400 hover:underline font-medium px-0.5"
-                      onClick={handleStartEditor}
+                      onClick={handleStartRecording}
                     >
+                      
                       recording an audio note
                     </button>
                     or, if you prefer
                     <button
+                      type="button"
                       className="text-lime-400 hover:underline font-medium px-0.5"
                       onClick={handleStartEditor}> use text only
                     </button>.
@@ -99,16 +147,27 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateNote}) => {
             </div>
             
             {
-              !shouldShowOnboarding &&
-              <button
-                type="submit"
-                className="w-full text-sm bg-lime-400 text-lime-950 font-medium py-4 outline-none hover:bg-lime-500"
-              >
-                Salvar nota
-              </button>
+              isRecording
+                ? <button
+                  type="button"
+                  className="w-full text-sm bg-slate-900 text-slate-300 font-medium py-4 outline-none hover:text-slate-100 flex items-center justify-center gap-1 "
+                  onClick={handleStopRecording}
+                >
+                  <div className="bg-red-500 size-3 rounded-full animate-pulse"/>
+                  Recording... [click to stop]
+                </button>
+                : <button
+                  type="button"
+                  onClick={handleSaveNote}
+                  className="w-full text-sm bg-lime-400 text-lime-950 font-medium py-4 outline-none hover:bg-lime-500 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-700"
+                  disabled={content === ''}
+                >
+                  Save note
+                </button>
             }
           
           </form>
+        
         
         </Dialog.Content>
       </Dialog.Portal>
