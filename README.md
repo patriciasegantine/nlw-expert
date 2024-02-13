@@ -1,6 +1,6 @@
 # Notes
 
-[<img src="./src/assets/image.png" alt="portfolio">](https://nlw-expert-pearl.vercel.app/)
+[<img src="./src/assets/expert.webp" alt="portfolio">](https://nlw-expert-pearl.vercel.app/)
 [Notes - Website](https://nlw-expert-pearl.vercel.app/)
 
 ## Description
