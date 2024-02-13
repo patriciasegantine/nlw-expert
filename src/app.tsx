@@ -42,6 +42,14 @@ export const App: React.FC = () => {
     setSearch(query)
   }
   
+  const onNoteDelete = (id: string) => {
+    
+    const newArray = notes.filter(note => note.id !== id)
+    
+    setNotes(newArray)
+    localStorage.setItem('notes', JSON.stringify(newArray))
+  }
+  
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-6 px-5">
       <img src={logo} alt="NLW expert"/>
@@ -67,8 +75,10 @@ export const App: React.FC = () => {
             return (
               <NoteCard
                 key={note.id}
+                id={note.id}
                 createDate={new Date(note.date)}
                 content={note.content}
+                onNoteDelete={onNoteDelete}
               />
             )
           })

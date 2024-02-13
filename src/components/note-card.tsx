@@ -5,9 +5,12 @@ import { Card } from "@/components/card.tsx";
 interface NoteCardProps {
   createDate: Date
   content: string
+  id: string
+  onNoteDelete: (id: string) => void
 }
 
-export const NoteCard: React.FC<NoteCardProps> = ({content, createDate}) => {
+export const NoteCard: React.FC<NoteCardProps> = ({content, createDate, id, onNoteDelete}) => {
+  
   return (
     <Card
       titleCard={formatDistanceToNow(createDate, {addSuffix: true})}
@@ -26,7 +29,9 @@ export const NoteCard: React.FC<NoteCardProps> = ({content, createDate}) => {
           
           <button
             type="button"
-            className="w-full text-sm bg-slate-800 text-slate-300 font-medium py-4 outline-none group">
+            className="w-full text-sm bg-slate-800 text-slate-300 font-medium py-4 outline-none group"
+            onClick={() => onNoteDelete(id)}
+          >
             Deseja <span className="text-red-400 group-hover:underline">apagar essa nota</span> ?
           </button>
         </>
