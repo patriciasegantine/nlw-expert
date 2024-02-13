@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="./src/assets/image.png" alt="portfolio">
 
-Currently, two official plugins are available:
+[Notes - Website](https://nlw-expert-pearl.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+This project is a front-end application developed in ReactJS, focusing on the implementation of core concepts such as
+Properties, States, and Components. It utilizes TypeScript for typing, Vite for tooling, TailwindCSS for a responsive
+interface, and incorporates Web APIs like Web Storage and Web Speech.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The primary feature of the application is a note-taking functionality, allowing users to add notes through voice or text
+input.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- Web Storage API
+- Web Speech API
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+To run this project locally, follow the steps below:
+
+1. Make sure you have Node.js and npm installed on your machine.
+2. Clone this repository.
+3. Navigate to the project directory.
+4. Install the dependencies by running the following command:```` npm install ````
+
+5. Start the development server with the following command:  ```` npm dev ````
+
+6. This will launch the project in your browser at [http://localhost:4000](http://localhost:4000).
+
+## Build
+
+1. To build the project for production, use the following command: ``` npm build ```
+
+2. This will generate an optimized and minified version of your project in the `dist` directory.
