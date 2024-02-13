@@ -115,6 +115,7 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateTextNote}) => {
                     </button>.
                   </p>
                   : <textarea
+                    maxLength={100}
                     autoFocus
                     className="text-sm leading-6 text-neutral-400 bg-transparent resize-none flex-1 outline-none"
                     onChange={handleContentChanged}
