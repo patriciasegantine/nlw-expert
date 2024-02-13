@@ -58,12 +58,12 @@ export const App: React.FC = () => {
         <input
           type="text"
           placeholder={'Search in your notes...'}
-          className="w-full bg-transparent text-2xl font-semibold tracking-tight placeholder:text-slate-500 outline-none"
+          className="w-full bg-transparent text-xl font-semibold tracking-tight placeholder:text-neutral-500 outline-none"
           onChange={handleOnSearch}
         />
       </form>
       
-      <div className="h-[1px] bg-slate-700"/>
+      <div className="h-[1px] bg-neutral-700"/>
       
       <div className="grid grid-cols auto-rows-[250px] gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <NewNoteCard

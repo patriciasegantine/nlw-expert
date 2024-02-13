@@ -84,19 +84,20 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateTextNote}) => {
   
   return (
     <  Card
+      newCard={true}
       titleCard={'Add note'}
-      contentCard={'Record an audio note that will be automatically converted to text.'}
+      contentCard={'Turn your voice into text with a breeze! Record an audio note for easy, automatic conversion or simply type your thoughts. It\'s that simple!'}
       handleResetEditor={handleResetEditor}
       bodyCard={
         <>
           <form className="flex flex-1 flex-col">
             <div className="flex flex-col flex-1 gap-3 p-5">
-                <span className="text-sm font-medium text-slate-300">
+                <span className="text-sm font-medium text-neutral-300">
                 Add note
                 </span>
               {
                 shouldShowOnboarding
-                  ? <p className="text-sm leading-6 text-slate-400">
+                  ? <p className="text-sm leading-6 text-neutral-400">
                     Start by
                     <button
                       type="button"
@@ -115,7 +116,7 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateTextNote}) => {
                   </p>
                   : <textarea
                     autoFocus
-                    className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none"
+                    className="text-sm leading-6 text-neutral-400 bg-transparent resize-none flex-1 outline-none"
                     onChange={handleContentChanged}
                     value={content}
                   />
@@ -127,7 +128,7 @@ export const NewNoteCard: React.FC<INewNoteCard> = ({onCreateTextNote}) => {
               isRecording
                 ? <button
                   type="button"
-                  className="w-full text-sm bg-slate-900 text-slate-300 font-medium py-4 outline-none hover:text-slate-100 flex items-center justify-center gap-1 "
+                  className="w-full text-sm bg-neutral-900 text-300 font-medium py-4 outline-none hover:text-100 flex items-center justify-center gap-1 "
                   onClick={handleStopRecording}
                 >
                   <div className="bg-red-500 size-3 rounded-full animate-pulse"/>
