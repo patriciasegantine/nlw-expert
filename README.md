@@ -1,7 +1,6 @@
 # Notes
 
-[<img src="./src/assets/expert.webp" alt="portfolio">](https://nlw-expert-pearl.vercel.app/)
-[Notes - Website](https://nlw-expert-pearl.vercel.app/)
+[<img src="./src/assets/expert-thumbnail.svg" alt="portfolio">](https://nlw-expert-pearl.vercel.app/)
 
 ## Description
 
@@ -18,8 +17,10 @@ input.
 - TypeScript
 - Vite
 - TailwindCSS
+- RadixUI
+- SpeechRecognitionAPI
+- Sonner
 - Web Storage API
-- Web Speech API
 
 ## Getting Started
 
