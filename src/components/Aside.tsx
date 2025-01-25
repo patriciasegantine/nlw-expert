@@ -1,5 +1,6 @@
 import { AllNotes } from "./AllNotes";
 import { Tags } from "@/components/Tags.tsx";
+import { Stats } from "@/components/Stats.tsx";
 
 interface AsideProps {
 
@@ -12,6 +13,7 @@ export function Aside({}: AsideProps) {
       <div className="flex flex-col flex-1 space-y-16 overflow-y-auto pt-4">
         <AllNotes/>
         <Tags/>
+        <Stats/>
       </div>
       
       <div className="mt-4">
