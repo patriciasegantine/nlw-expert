@@ -1,10 +1,12 @@
+import { OldApp } from "@/components/OldApp.tsx";
+
 interface NotesGridProps {
 }
 
 export const NotesGrid = ({}: NotesGridProps) => {
   return (
     <div>
-      NotesGrid
+      <OldApp/>
     </div>
   );
 };
