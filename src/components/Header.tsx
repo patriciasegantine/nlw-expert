@@ -27,7 +27,7 @@ export function Header({onSearch}: HeaderProps) {
   
   return (
     <header className="bg-muted border-b">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className=" mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Book className="h-6 w-6 text-foreground"/>
           <h1 className="text-xl font-bold text-foreground">SmartNotes</h1>
