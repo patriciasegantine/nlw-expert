@@ -14,7 +14,7 @@ export const Layout = ({}: LayoutProps) => {
       <div className="grid h-screen grid-rows-[auto_1fr_auto] bg-background text-foreground">
         <Header/>
         
-        <div className="grid grid-cols-[250px_1fr]">
+        <div className="grid md:grid-cols-[250px_1fr]">
           <Aside/>
           <NotesGrid/>
         </div>

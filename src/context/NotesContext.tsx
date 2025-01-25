@@ -21,26 +21,64 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({children
     {
       id: uuidv4(),
       title: "First Note",
-      content: "This is the content for the first note.",
+      content: "This is the content for the first note. It has been expanded to include more details and additional information to ensure it reaches exactly 200 characters in total length, including this.",
       isFavorite: false,
-      tags: ["important"],
+      tags: ["important", "work"],
     },
     {
       id: uuidv4(),
       title: "Second Note",
       content: "Second note content is here, nice and short!",
       isFavorite: true,
-      tags: [],
+      tags: ["personal"],
     },
     {
       id: uuidv4(),
       title: "Third Note",
       content: "The third note has a longer content to check layout adaptation.",
       isFavorite: false,
-      tags: ["todo"],
-    },]
+      tags: ["todo", "urgent"],
+    },
+    {
+      id: uuidv4(),
+      title: "Fourth Note",
+      content: "A quick idea captured here for future reference.",
+      isFavorite: true,
+      tags: ["idea", "creative"],
+    },
+    {
+      id: uuidv4(),
+      title: "Fifth Note",
+      content: "Note without a tag, just plain and simple.",
+      isFavorite: false,
+      tags: [],
+    },
+    {
+      id: uuidv4(),
+      title: "Work Task",
+      content: "Details about an important task to complete for work.",
+      isFavorite: false,
+      tags: ["work", "priority"],
+    },
+    {
+      id: uuidv4(),
+      title: "Personal Goals",
+      content: "Personal objectives and goals for self-improvement.",
+      isFavorite: true,
+      tags: ["personal", "important"],
+    },
+  ]
   
-  const tags: string[] = ["important", "todo", "personal"]
+  const tags: string[] = [
+    "important",
+    "todo",
+    "personal",
+    "work",
+    "urgent",
+    "idea",
+    "creative",
+    "priority",
+  ];
   
   return (
     <NotesContext.Provider

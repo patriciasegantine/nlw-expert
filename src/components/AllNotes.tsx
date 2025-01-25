@@ -25,7 +25,9 @@ export function AllNotes({}: AllNotesProps) {
         >
           <Star size={16}/>
           Favorites
-          <span className="ml-auto">{notes.map(note => note.isFavorite).length}</span>
+          <span className="ml-auto">
+            {notes.filter(note => note.isFavorite).length}
+          </span>
         </Button>
         
         <Button

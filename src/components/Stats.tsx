@@ -19,7 +19,9 @@ export function Stats({}: StatsProps) {
           
           <div>
             <p className="text-sm">Favorites</p>
-            <p className="text-2xl font-bold">{notes.map(note => note.isFavorite).length}</p>
+            <p className="text-2xl font-bold">
+              {notes.filter(note => note.isFavorite).length}
+            </p>
           </div>
         </div>
       </div>

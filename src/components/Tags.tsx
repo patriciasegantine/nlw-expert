@@ -7,7 +7,12 @@ interface TagsProps {
 
 export function Tags({}: TagsProps) {
   
-  const {tags} = useNotes();
+  const {tags, notes} = useNotes();
+  
+  const tagCounts = tags.reduce((acc, tag) => {
+    acc[tag] = notes.filter(note => note.tags.includes(tag)).length;
+    return acc;
+  }, {} as Record<string, number>);
   
   return (
     <div>
@@ -21,7 +26,7 @@ export function Tags({}: TagsProps) {
           >
             <Hash size={16}/>
             {tag}
-            <span className="ml-auto">{tags.length}</span>
+            <span className="ml-auto">{tagCounts[tag]}</span>
           </Button>
         ))}
       </div>
