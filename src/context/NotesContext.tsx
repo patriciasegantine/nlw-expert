@@ -11,18 +11,20 @@ interface Note {
 
 interface NotesContextType {
   notes: Note[];
+  tags: string[]
 }
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
 export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
-  const notes = [{
-    id: uuidv4(),
-    title: "First Note",
-    content: "This is the content for the first note.",
-    isFavorite: false,
-    tags: ["important"],
-  },
+  const notes = [
+    {
+      id: uuidv4(),
+      title: "First Note",
+      content: "This is the content for the first note.",
+      isFavorite: false,
+      tags: ["important"],
+    },
     {
       id: uuidv4(),
       title: "Second Note",
@@ -38,10 +40,13 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({children
       tags: ["todo"],
     },]
   
+  const tags: string[] = ["important", "todo", "personal"]
+  
   return (
     <NotesContext.Provider
       value={{
         notes,
+        tags
       }}
     >
       {children}
