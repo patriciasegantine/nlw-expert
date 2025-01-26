@@ -6,27 +6,33 @@ interface TagsProps {
 }
 
 export function Tags({}: TagsProps) {
+  const {notes} = useNotes();
   
-  const {tags, notes} = useNotes();
-  
-  const tagCounts = tags.reduce((acc, tag) => {
-    acc[tag] = notes.filter(note => note.tags.includes(tag)).length;
+  const tagCounts = notes.reduce((acc: Record<string, number>, note) => {
+    note.tags.forEach((tag) => {
+      const normalizedTag = tag.toLowerCase();
+      acc[normalizedTag] = (acc[normalizedTag] || 0) + 1;
+    });
     return acc;
-  }, {} as Record<string, number>);
+  }, {});
+  
+  const tags = Object.entries(tagCounts)
   
   return (
     <div>
       <h2 className="mb-2 px-2 text-lg font-semibold">Tags</h2>
-      <div className="space-y-1">
-        {tags.map((tag) => (
+      <div className="space-y-1 text-left">
+        {tags.map(([tag, count]) => (
           <Button
             key={tag}
             variant="ghost"
-            className="flex w-full items-center gap-2"
+            className="flex w-full items-start justify-between gap-2"
           >
-            <Hash size={16}/>
-            {tag}
-            <span className="ml-auto">{tagCounts[tag]}</span>
+            <div className="flex items-center gap-2">
+              <Hash size={16}/>
+              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+            </div>
+            <span>{count}</span>
           </Button>
         ))}
       </div>

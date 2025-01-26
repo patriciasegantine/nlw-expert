@@ -1,4 +1,4 @@
-export enum Tags {
+export enum TagsEnum {
   IMPORTANT = "bg-orange-600 text-white",
   PERSONAL = "bg-teal-500 text-white",
   WORK = "bg-indigo-500 text-white",
@@ -6,7 +6,7 @@ export enum Tags {
   IDEA = "bg-purple-500 text-white",
 }
 
-export const TAG_OPTIONS = Object.entries(Tags).map(([key, value]) => ({
+export const TAG_OPTIONS_ENUM = Object.entries(TagsEnum).map(([key, value]) => ({
   key,
   tag: key.toLowerCase(),
   color: value,
