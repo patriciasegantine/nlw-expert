@@ -1,21 +1,20 @@
-import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
-import { Aside } from "@/components/Aside.tsx";
-import { NotesGrid } from "@/components/NotesGrid.tsx";
-import { NotesProvider } from "@/context/NotesContext.tsx";
+import { useState } from "react";
+import { NotesProvider } from "@/context/NotesContext";
+import { Header } from "@/components/Header";
+import { Aside } from "@/components/Aside";
+import { NotesGrid } from "@/components/NotesGrid";
+import { Footer } from "@/components/Footer";
 
-interface LayoutProps {
-}
-
-export const Layout = ({}: LayoutProps) => {
+export const Layout = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   
   return (
     <NotesProvider>
       <div className="grid h-screen grid-rows-[auto_1fr_auto] bg-background text-foreground">
-        <Header/>
+        <Header handleShowAside={() => setIsDrawerOpen(true)}/>
         
         <div className="grid md:grid-cols-[250px_1fr]">
-          <Aside/>
+          <Aside isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}/>
           <NotesGrid/>
         </div>
         
