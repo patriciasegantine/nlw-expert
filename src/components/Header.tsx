@@ -3,7 +3,7 @@ import { Book, Menu, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ModeToggle } from "@/components/ModeToggle";
-import { useClickOutside } from "@/hook/useClickOutside";
+import { useClickOutside } from "@/hooks/useClickOutside";
 import { useNotes } from "@/context/NotesContext.tsx";
 
 interface HeaderProps {

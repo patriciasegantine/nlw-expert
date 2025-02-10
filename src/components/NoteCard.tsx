@@ -6,11 +6,11 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { truncateText } from "@/utils/truncateText.tsx";
 import { Edit } from "lucide-react";
 import { getTagColor } from "@/utils/getTagColor.tsx";
-import { Note } from "@/context/NotesContext.tsx";
 import { NoteModal } from "@/components/NoteModal.tsx";
+import { INote } from "@/@types/notes.ts";
 
 interface NoteCardProps {
-  note: Note
+  note: INote
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({note}) => {
