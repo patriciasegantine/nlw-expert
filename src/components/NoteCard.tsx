@@ -8,16 +8,25 @@ import { Edit } from "lucide-react";
 import { getTagColor } from "@/utils/getTagColor.tsx";
 import { NoteModal } from "@/components/NoteModal.tsx";
 import { INote } from "@/@types/notes.ts";
+import { useNotes } from "@/context/NotesContext.tsx";
 
 interface NoteCardProps {
   note: INote
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({note}) => {
-  
-  const {id, title, content, isFavorite, tags} = note
+  const {notes, setNotes} = useNotes();
+  const {title, content, isFavorite, tags} = note
   
   const [isModalOpen, setModalOpen] = useState(false);
+  
+  const toggleFavorite = () => {
+    const updatedNotes = notes.map(n =>
+      n.id === note.id ? {...n, isFavorite: !n.isFavorite} : n
+    );
+    setNotes(updatedNotes);
+    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+  };
   
   return (
     <>
@@ -25,7 +34,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({note}) => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => alert(`favorite note ${id}`)}
+          onClick={toggleFavorite}
           title={isFavorite ? "Remove from favourites" : "Add at favourites"}
           className="absolute top-2 right-2 hover:text-primary"
         >
