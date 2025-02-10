@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NotesProvider } from "@/context/NotesContext";
 import { Header } from "@/components/Header";
 import { Aside } from "@/components/Aside";
-import { NotesGrid } from "@/components/NotesGrid";
+import { NotesList } from "@/components/NotesList.tsx";
 import { Footer } from "@/components/Footer";
 
 export const Layout = () => {
@@ -15,7 +15,7 @@ export const Layout = () => {
         
         <div className="grid md:grid-cols-[250px_1fr]">
           <Aside isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}/>
-          <NotesGrid/>
+          <NotesList/>
         </div>
         
         <Footer/>
