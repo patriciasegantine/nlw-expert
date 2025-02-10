@@ -4,25 +4,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ModeToggle } from "@/components/ModeToggle";
 import { useClickOutside } from "@/hook/useClickOutside";
+import { useNotes } from "@/context/NotesContext.tsx";
 
 interface HeaderProps {
-  onSearch?: (search: string) => void;
 }
 
-export function Header({onSearch}: HeaderProps) {
+export function Header({}: HeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const {search, setSearch} = useNotes();
   const searchRef = useRef<HTMLDivElement>(null);
   
   useClickOutside(searchRef, () => {
-    if (searchValue === "") {
+    if (search === "") {
       setIsSearchOpen(false);
     }
   });
   
   const handleClearInput = () => {
-    setSearchValue("");
-    onSearch?.("");
+    setSearch("");
   };
   
   return (
@@ -48,16 +47,15 @@ export function Header({onSearch}: HeaderProps) {
             <div className="relative w-40 transition-all duration-300 focus-within:w-64">
               <Input
                 type="text"
-                value={searchValue}
+                value={search}
                 placeholder="Search notes..."
                 autoFocus
                 className="pr-10"
                 onChange={(e) => {
-                  setSearchValue(e.target.value);
-                  onSearch?.(e.target.value);
+                  setSearch(e.target.value);
                 }}
               />
-              {searchValue && (
+              {search && (
                 <Button
                   variant="ghost"
                   size="icon"
