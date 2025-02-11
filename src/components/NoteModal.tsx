@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Note } from "@/context/NotesContext";
+import { INote } from "@/@types/notes.ts";
 
 interface NoteModalProps {
   open: boolean;
   onClose: () => void;
-  note?: Note | null;
-  onSubmit: (note: Partial<Note>) => void;
+  note?: INote | null;
+  onSubmit: (note: Partial<INote>) => void;
 }
 
 export const NoteModal: React.FC<NoteModalProps> = ({open, onClose, note, onSubmit}) => {
